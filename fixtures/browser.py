@@ -1,5 +1,5 @@
 import pytest
-from playwright.sync_api import sync_playwright, Playwright, Page
+# from playwright.sync_api import sync_playwright, Playwright, Page
 
 # FIRST METHOD
 
@@ -12,22 +12,30 @@ from playwright.sync_api import sync_playwright, Playwright, Page
 #     browser.close()
 #     p.stop()
 
-# SECOND METHOD
-@pytest.fixture(scope="session")
-def browser(playwright: Playwright):
-    browser = playwright.firefox.launch(headless=False)
-    yield browser
-    browser.close()
-    playwright.stop()
+# # SECOND METHOD
+# @pytest.fixture(scope="function")
+# def browser(playwright):
+#     browser = playwright.firefox.launch(headless=False)
+#     yield browser
+#     browser.close()
+#     playwright.stop()
+# #
+# @pytest.fixture
+# def page(browser):
+#     context = browser.new_context()
+#     yield context
+#     context.close()
 
-@pytest.fixture
-def browser_context(browser):
+# @pytest.fixture(scope="function")
+# def page(page):
+#     page.goto(url="")
+#     yield page
+
+@pytest.fixture()
+def page(browser):
     context = browser.new_context()
-    yield context
-    context.close()
-
-@pytest.fixture
-def page(page: Page):
-    page.goto(url="https://google.com")
+    page = context.new_page()
+    page.set_viewport_size({"width":1600, "height":800})
+    page.goto(url="https://ask.fm/login")
     yield page
-    page.close()
+    context.close()
