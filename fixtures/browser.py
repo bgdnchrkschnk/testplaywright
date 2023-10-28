@@ -35,7 +35,7 @@ import pytest
 def page(browser):
     context = browser.new_context()
     page = context.new_page()
-    page.set_viewport_size({"width":1600, "height":800})
+    # page.set_viewport_size({"width":1600, "height":800})
     page.goto(url="https://ask.fm/login")
     yield page
     context.close()

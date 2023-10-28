@@ -1,0 +1,1 @@
+from fixtures.swag_labs import *
