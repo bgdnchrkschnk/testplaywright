@@ -1,2 +1,2 @@
-def sort_list():
+def sort_list(l: list):
     pass
